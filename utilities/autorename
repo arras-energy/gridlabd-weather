@@ -1,0 +1,13 @@
+#!/bin/bash
+# autorename - Script to autorename TMY3 CSV files to ST_City.tmy3
+# Copyright (C) 2016, Stanford University
+# Author: dchassin@slac.stanford.edu
+#
+# Run this script is a folder containing original TMY3 files from http://rredc.nrel.gov/solar/old_data/nsrdb/1991-2005/tmy3/zip/alltmy3a.zip
+#
+for csv in *.CSV; do
+	header=$(head -n 1 $csv)
+	city=$(echo $header | cut -f2 -d, | sed 's/[ \/]/_/g; s/[^A-Z_]//g; s/__*/_/g; s/.*/\L&/;s/[a-z]*/\u&/g' )
+	state=$(echo $header | cut -f3 -d,)
+	mv $csv ${state}-${city}.tmy3
+done
