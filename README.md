@@ -4,3 +4,4 @@ The files have been renamed from the NREL FN numbered scheme to the GridLAB-D [S
 
 For details on TMY3 data format, see www.nrel.gov/docs/fy08osti/43156.pdf.
 
+As of Version 4.2, GridLAB-D can directly manage local copies of this weather data using the `gridlabd weather` command.
