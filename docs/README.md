@@ -1,6 +1,6 @@
 Welcome to the GridLAB-D Weather Archive. This archive is organized by country. Please go to the section for your country. If your country is not listed but you have weather data you would like to submit to this archive, please contact the SLAC Gismo team.
 
-As of Version 4.2.1, GridLAB-D can directly manage local copies of this weather data using the `gridlabd weather` command.
+As of Version 4.2.1, GridLAB-D can directly manage local copies of this weather data using the [`gridlabd weather`](http://docs.gridlabd.us/index.html?owner=slacgismo&project=gridlabd&branch=develop&folder=/Subcommand&doc=/Subcommand/Weather.md) command.
 
 # United States
 
