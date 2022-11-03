@@ -2,10 +2,9 @@ name: validate
 
 on:
   push:
-    branches: [ master develop ]
-
+    branches: [ develop ]
   pull_request:
-    branches: [ master develop ]
+    branches: [ develop ]
 
 jobs:
   build:
