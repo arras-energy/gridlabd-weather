@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: slacgismo/gridlabd:master
+    container: slacgismo/gridlabd:latest
     
     steps:
     - uses: actions/checkout@v2
