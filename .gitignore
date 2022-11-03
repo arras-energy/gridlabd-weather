@@ -2,4 +2,4 @@
 *.pyc
 .tmp*
 gridlabd.json
-gridlabd.err
+autotest.err
