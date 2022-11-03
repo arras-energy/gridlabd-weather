@@ -1,0 +1,22 @@
+name: validate
+
+on:
+  push:
+    branches: [ master develop ]
+  pull_request:
+    branches: [ master develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: slacgismo/gridlabd:master
+    steps:
+    - uses: actions/checkout@v2
+    - name: Validate data
+      run: utilities/autotest
+    - name: Save results
+      uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: autotest.err
+        path: autotest.err  

@@ -1,0 +1,55 @@
+#!/bin/bash
+
+COUNTRIES=US
+
+DONE=0
+PASS=0
+FAIL=0
+
+function finish
+{
+	echo "$FAIL tests failed."
+	echo "$PASS tests passed."
+	echo "$DONE tests completed."
+	echo "$((100*$PASS/$DONE))% success"
+	rm -f $TMP/*
+	rmdir $TMP
+	rm -f gridlabd.json
+}
+trap finish EXIT
+
+TMP=.tmp$$
+mkdir -p $TMP
+
+ERRLOG=autotest.err
+rm -f $ERRLOG
+
+for FILE in ${COUNTRIES}/*.tmy3; do
+	echo -n "Checking $FILE..."
+	GLM=$TMP/$(basename ${FILE/.tmy3/.glm})
+	ERR=${GLM/.glm/.err}
+	echo "
+module climate;
+object climate {
+	tmyfile \"$FILE\";
+}
+" > $GLM
+	if gridlabd -I $GLM 2>$ERR; then
+		echo "OK"
+		PASS=$(($PASS+1))
+	else
+		echo "FAIL (see $ERRLOG for details)"
+		FAIL=$(($FAIL+1))
+	fi
+	if [ -s $ERR ]; then
+		if [ ! -s $ERRLOG ]; then
+			echo "Autotest stderr output for $(git rev-parse --abbrev-ref HEAD) at $(date)" > $ERRLOG
+		fi
+		echo "" >> $ERRLOG
+		echo "$FILE:" >> $ERRLOG
+		cat $ERR >> $ERRLOG
+	fi
+	DONE=$(($DONE+1))
+done
+
+exit $FAIL
