@@ -14,7 +14,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: slacgismo/gridlabd:latest
+    container: lfenergy/arras:latest
     
     steps:
     - uses: actions/checkout@v3
